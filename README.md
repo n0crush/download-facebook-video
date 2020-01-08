@@ -1,3 +1,3 @@
-pip install requests
+pip install -r requirement.txt
 
 or not
