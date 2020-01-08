@@ -58,7 +58,7 @@ def downloadVideo(url, folder, video_name):
 			print("[!] Video name invalid. Used 'temp' as name.")
 			break
 
-	if ".mp4" not in video_name:		# prevent error when named file
+	if ".mp4" not in video_name:		# prevent error when naming file
 		video_name += ".mp4"
 	path = folder+"\\"+video_name
 
