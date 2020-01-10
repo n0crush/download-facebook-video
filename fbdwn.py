@@ -27,24 +27,18 @@ except:
 	print('[WARNING] Error occured when try import Package.')
 	sys.exit('[ RUN AGAIN ]')
 
+
+
 def getLink(url):
-	
-	url = "https://m"+url[11:]				# redirect to mobile interface
 
-	res = requests.get(url, timeout=10, allow_redirects=True)
+	res = requests.get(url, timeout=6)
 
-	if res.status_code!=200:
+	if res.status_code != 200:
 		sys.exit("[!] Invalid URL. Check again!")
 
-	if (re.findall("/video_redirect/", res.text))==[]:
-		sys.exit("[!] Video not found.")
+	origin_link = re.search('hd_src:"(.+?)"', res.text).group(1)
 
-	text_data = res.text
-	url_decoded = unquote(text_data.split("?src=")[1].split("\"")[0])			# decode url
-
-	return url_decoded
-
-
+	return origin_link
 
 def downloadVideo(url, folder, video_name):
 
@@ -73,7 +67,7 @@ def downloadVideo(url, folder, video_name):
 def usage():
 	print("-"*25)
 	print("Use: python fbdwn.py \"url\" \"folder\" \"name\"")
-	print("\t--url	  :		url taken in video by right click.")
+	print("\t--url    :		url taken in video by right click.")
 	print("\t--folder :		absolute path, if omited use default path.")
 	print("\t--name   :		name.mp4 or just name.")
 	print("-"*25)
